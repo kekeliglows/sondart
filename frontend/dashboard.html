@@ -7,6 +7,7 @@
   <title>Tableau de bord | SondArt</title>
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .dashboard {
       max-width: 1400px;
@@ -235,7 +236,7 @@
   <div class="dashboard">
     <div class="dashboard-header">
       <div class="dashboard-title">
-        <h1>Bienvenue 👋</h1>
+        <h1>Bienvenue</h1>
         <p id="user-greeting">Chargement...</p>
       </div>
       <div class="dashboard-actions">
@@ -245,10 +246,10 @@
         <div class="user-menu">
           <div class="user-avatar" id="user-avatar">U</div>
           <div class="dropdown-menu" id="dropdown-menu">
-            <a href="profile.html" class="dropdown-item">📝 Mon profil</a>
-            <a href="../" class="dropdown-item">🏠 Accueil</a>
+            <a href="../login/profile.html" class="dropdown-item"><i data-lucide="user-round" aria-hidden="true"></i> Mon profil</a>
+            <a href="../" class="dropdown-item"><i data-lucide="house" aria-hidden="true"></i> Accueil</a>
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item" id="logout-btn">🚪 Déconnexion</button>
+            <button class="dropdown-item" id="logout-btn"><i data-lucide="log-out" aria-hidden="true"></i> Déconnexion</button>
           </div>
         </div>
       </div>
@@ -256,21 +257,21 @@
 
     <div class="dashboard-grid">
       <div class="card">
-        <div class="card-icon">📊</div>
+        <div class="card-icon"><i data-lucide="chart-column" aria-hidden="true"></i></div>
         <div class="card-title">Vos sondages</div>
         <div class="card-description">Sondages créés par vos soins</div>
         <div class="card-stat" id="survey-count">0</div>
       </div>
 
       <div class="card">
-        <div class="card-icon">✅</div>
+        <div class="card-icon"><i data-lucide="circle-check" aria-hidden="true"></i></div>
         <div class="card-title">Réponses</div>
         <div class="card-description">Réponses collectées au total</div>
         <div class="card-stat" id="response-count">0</div>
       </div>
 
       <div class="card">
-        <div class="card-icon">👥</div>
+        <div class="card-icon"><i data-lucide="users" aria-hidden="true"></i></div>
         <div class="card-title">Répondants</div>
         <div class="card-description">Participants ayant répondu</div>
         <div class="card-stat" id="respondent-count">0</div>
@@ -281,7 +282,7 @@
       <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Vos sondages récents</h2>
       <div id="surveys-list">
         <div class="empty-state">
-          <div class="empty-icon">📋</div>
+          <div class="empty-icon"><i data-lucide="clipboard-list" aria-hidden="true"></i></div>
           <div class="empty-title">Pas encore de sondages</div>
           <div class="empty-description">Créez votre premier sondage pour commencer à collecter des avis.</div>
           <a href="../frontend/create_survey.html" class="btn btn-primary">
@@ -293,6 +294,7 @@
   </div>
 
   <script type="module" src="dashboard.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 
 </html>

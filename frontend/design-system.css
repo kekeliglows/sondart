@@ -51,6 +51,14 @@ a {
   cursor: pointer;
 }
 
+[data-lucide] {
+  width: 1.1em;
+  height: 1.1em;
+  flex: 0 0 auto;
+  vertical-align: -0.15em;
+  stroke-width: 2;
+}
+
 a {
   text-decoration: none;
   color: inherit;

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="frontend/design-system.css" />
   <link rel="stylesheet" href="frontend/styles.css" />
   <link rel="stylesheet" href="index.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -47,7 +48,7 @@
 
       <div class="hero-content">
         <div class="hero-text">
-          <span class="hero-badge">✨ Collectez des avis en 2 minutes</span>
+          <span class="hero-badge"><i data-lucide="sparkles" aria-hidden="true"></i> Collectez des avis en 2 minutes</span>
           <h1 class="hero-title">Créez des sondages qui <span class="gradient-text">captivent</span> vos utilisateurs</h1>
           <p class="hero-description">Une plateforme intuitive pour créer, partager et analyser vos sondages. Du concept à la première réponse, plus simple que jamais.</p>
           
@@ -98,15 +99,15 @@
           </div>
 
           <div class="floating-card card-1">
-            <div class="card-icon">📊</div>
+            <div class="card-icon"><i data-lucide="chart-column" aria-hidden="true"></i></div>
             <div class="card-text">Résultats<br>en temps réel</div>
           </div>
           <div class="floating-card card-2">
-            <div class="card-icon">🎨</div>
+            <div class="card-icon"><i data-lucide="palette" aria-hidden="true"></i></div>
             <div class="card-text">Design<br>personnalisable</div>
           </div>
           <div class="floating-card card-3">
-            <div class="card-icon">🔗</div>
+            <div class="card-icon"><i data-lucide="link" aria-hidden="true"></i></div>
             <div class="card-text">Partage facile<br>QR + Lien</div>
           </div>
         </div>
@@ -241,6 +242,7 @@
   </footer>
 
   <script src="frontend/app.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 
 </html>

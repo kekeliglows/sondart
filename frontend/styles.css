@@ -13,6 +13,12 @@ main {
   padding: var(--spacing-lg);
 }
 
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .page-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 3vw, 2.6rem);

@@ -7,6 +7,7 @@
   <title>Vérifier votre email | SondArt</title>
   <link rel="stylesheet" href="../frontend/design-system.css" />
   <link rel="stylesheet" href="login.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .verify-container {
       max-width: 500px;
@@ -146,7 +147,7 @@
   </header>
 
   <main class="verify-container">
-    <div class="verify-icon">✉️</div>
+    <div class="verify-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
     <h1 class="verify-title">Vérifiez votre email</h1>
     <p class="verify-description">
       Nous avons envoyé un lien de confirmation à votre adresse email. Cliquez sur le lien pour activer votre compte.
@@ -155,7 +156,7 @@
     <div class="verify-email" id="verify-email">user@example.com</div>
 
     <button class="verify-button" id="open-email-btn">
-      📧 Ouvrir ma boîte mail
+      <i data-lucide="mail-open" aria-hidden="true"></i> Ouvrir ma boîte mail
     </button>
 
     <div class="verify-tips">
@@ -175,6 +176,7 @@
   </main>
 
   <script type="module" src="verify-email.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 
 </html>

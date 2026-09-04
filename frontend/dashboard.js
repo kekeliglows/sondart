@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </a>
               </div>
               <div style="display: flex; gap: 2rem; font-size: 0.9rem; color: var(--color-muted);">
-                <div>📅 ${new Date(survey.created_at).toLocaleDateString('fr-FR')}</div>
+                <div>${new Date(survey.created_at).toLocaleDateString('fr-FR')}</div>
               </div>
             </div>
           `).join('');

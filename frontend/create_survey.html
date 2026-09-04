@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Créer un sondage</title>
   <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="forms.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <main class="page-shell">
@@ -38,7 +40,7 @@
       <div id="questions-container">
         <h2>Questions</h2>
       </div>
-      <button type="button" id="add-question">+ ajouter une question</button>
+      <button type="button" id="add-question"><i data-lucide="plus" aria-hidden="true"></i> Ajouter une question</button>
 
       <button type="submit">Créer le sondage</button>
       <p id="form-message" aria-live="polite"></p>
@@ -46,6 +48,6 @@
   </main>
 
   <script type="module" src="create_survey.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
-<!-- je ne trouve pas son css-->

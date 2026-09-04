@@ -7,6 +7,7 @@
   <title>Inscription | SondArt</title>
   <link rel="stylesheet" href="../frontend/design-system.css" />
   <link rel="stylesheet" href="login.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -81,7 +82,7 @@
             aria-pressed="false"
             aria-label="Afficher le mot de passe"
           >
-            <span aria-hidden="true">👁</span>
+            <i data-lucide="eye" aria-hidden="true"></i>
           </button>
         </div>
         <div id="password-strength" class="password-strength" aria-live="polite"></div>
@@ -120,6 +121,7 @@
   </main>
 
   <script type="module" src="connexion.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 
 </html>

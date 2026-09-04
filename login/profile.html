@@ -7,6 +7,7 @@
   <title>Complétez votre profil | SondArt</title>
   <link rel="stylesheet" href="../frontend/design-system.css" />
   <link rel="stylesheet" href="login.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .onboarding-container {
       max-width: 600px;
@@ -118,7 +119,7 @@
     </header>
 
     <div class="success-message" id="success-message">
-      ✓ Profil mis à jour avec succès !
+      <i data-lucide="circle-check" aria-hidden="true"></i> Profil mis à jour avec succès !
     </div>
 
     <form id="profile-form" class="auth-form" novalidate>
@@ -162,12 +163,13 @@
 
     <div style="text-align: center; margin-top: 2rem;">
       <a href="../frontend/dashboard.html" class="nav-link" style="display: inline-block;">
-        Passer cette étape →
+        Passer cette étape <i data-lucide="arrow-right" aria-hidden="true"></i>
       </a>
     </div>
   </main>
 
   <script type="module" src="profile.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 
 </html>
