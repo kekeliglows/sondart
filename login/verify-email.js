@@ -64,7 +64,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (user && user.email_confirmed_at) {
       clearInterval(checkEmailVerified);
       sessionStorage.removeItem('pending_verification_email');
-      window.location.href = 'profile.html';
+      // Redirection avec chemin absolu pour éviter les problèmes avec les hashes Supabase
+      const basePath = window.location.origin;
+      window.location.href = basePath + '/login/profile.html';
     }
   }, 3000);
 

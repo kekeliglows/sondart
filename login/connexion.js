@@ -258,7 +258,8 @@ async function handleRegister() {
     
     // Rediriger vers la page de vérification d'email
     setTimeout(() => {
-      window.location.href = 'verify-email.html';
+      const basePath = window.location.origin;
+      window.location.href = basePath + '/login/verify-email.html';
     }, 1500);
   } catch (error) {
     const message = error.message === 'offline'

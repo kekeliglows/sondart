@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   
   if (authError || !user) {
-    window.location.href = 'login.html';
+    const basePath = window.location.origin;
+    window.location.href = basePath + '/login/login.html';
     return;
   }
 
@@ -61,7 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       successMsg.classList.add('visible');
       
       setTimeout(() => {
-        window.location.href = '../frontend/dashboard.html';
+        const basePath = window.location.origin;
+        window.location.href = basePath + '/frontend/dashboard.html';
       }, 1500);
 
     } catch (error) {
