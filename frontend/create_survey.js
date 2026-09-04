@@ -4,107 +4,119 @@ const form = document.getElementById('survey-form');
 const questionsContainer = document.getElementById('questions-container');
 const addQuestionButton = document.getElementById('add-question');
 const messageElement = document.getElementById('form-message');
+const surveyTypeInput = document.getElementById('survey_type');
+const surveyTypeHelp = document.getElementById('survey-type-help');
 
-const createQuestionField = (index = 1) => {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'question-item';
-  wrapper.innerHTML = `
-    <label>
-      Question ${index}
-      <input type="text" name="question_text" maxlength="1000" required />
-    </label>
-    <button type="button" class="remove-question">Supprimer</button>
-  `;
-
-  wrapper.querySelector('.remove-question').addEventListener('click', () => {
-    wrapper.remove();
-    refreshQuestionLabels();
-  });
-
-  return wrapper;
+const typeLabels = {
+  single_choice: 'Choix unique',
+  multiple_choice: 'Choix multiple',
+  open_ended: 'Question ouverte',
 };
-
-const refreshQuestionLabels = () => {
-  const items = questionsContainer.querySelectorAll('.question-item');
-  items.forEach((item, index) => {
-    const label = item.querySelector('label');
-    if (label) {
-      label.firstChild.textContent = `Question ${index + 1}`;
-    }
-  });
-};
-
-const addQuestion = () => {
-  const questionCount = questionsContainer.querySelectorAll('.question-item').length;
-  const nextQuestion = createQuestionField(questionCount + 1);
-  questionsContainer.appendChild(nextQuestion);
-};
-
-addQuestionButton.addEventListener('click', addQuestion);
-addQuestion();
 
 const showMessage = (text, type = 'info') => {
   messageElement.textContent = text;
-  messageElement.style.color = type === 'error' ? 'red' : '#1d7a0f';
+  messageElement.className = type === 'error' ? 'error' : 'success';
 };
+
+const createQuestionField = (index) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'question-item';
+  wrapper.innerHTML = `
+    <div class="question-main">
+      <label><span class="question-label">Question ${index}</span><input type="text" name="question_text" maxlength="1000" required /></label>
+      <label class="question-type-field">Type de question
+        <select name="question_type">
+          <option value="single_choice">Choix unique</option>
+          <option value="multiple_choice">Choix multiple</option>
+          <option value="open_ended">Question ouverte</option>
+        </select>
+      </label>
+      <div class="options-field">
+        <label>Options de réponse
+          <input type="text" name="options" maxlength="1000" placeholder="Une option par ligne ou séparée par des virgules" />
+        </label>
+        <small>Ajoutez au moins deux options.</small>
+      </div>
+    </div>
+    <button type="button" class="remove-question">Supprimer</button>`;
+
+  const typeSelect = wrapper.querySelector('[name="question_type"]');
+  const optionsField = wrapper.querySelector('.options-field');
+  const syncType = () => { optionsField.hidden = typeSelect.value === 'open_ended'; };
+  typeSelect.addEventListener('change', syncType);
+  wrapper.querySelector('.remove-question').addEventListener('click', () => {
+    if (questionsContainer.querySelectorAll('.question-item').length === 1) {
+      showMessage('Un sondage doit contenir au moins une question.', 'error');
+      return;
+    }
+    wrapper.remove();
+    questionsContainer.querySelectorAll('.question-item').forEach((item, itemIndex) => {
+      item.querySelector('.question-label').textContent = `Question ${itemIndex + 1}`;
+    });
+  });
+  syncType();
+  return wrapper;
+};
+
+const updateSurveyType = () => {
+  const mixed = surveyTypeInput.value === 'mixed';
+  surveyTypeHelp.textContent = mixed
+    ? 'Choisissez le type de chaque question pour composer un sondage varié.'
+    : `Toutes les questions seront de type « ${typeLabels[surveyTypeInput.value]} ».`;
+  questionsContainer.querySelectorAll('.question-item').forEach((item) => {
+    const typeSelect = item.querySelector('[name="question_type"]');
+    typeSelect.disabled = !mixed;
+    if (!mixed) {
+      typeSelect.value = surveyTypeInput.value;
+      item.querySelector('.options-field').hidden = surveyTypeInput.value === 'open_ended';
+    }
+  });
+};
+
+surveyTypeInput.addEventListener('change', updateSurveyType);
+addQuestionButton.addEventListener('click', () => {
+  questionsContainer.appendChild(createQuestionField(questionsContainer.querySelectorAll('.question-item').length + 1));
+  updateSurveyType();
+});
+questionsContainer.appendChild(createQuestionField(1));
+updateSurveyType();
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  messageElement.textContent = '';
-
+  const questions = Array.from(questionsContainer.querySelectorAll('.question-item')).map((item) => {
+    const questionType = item.querySelector('[name="question_type"]').value;
+    const options = item.querySelector('[name="options"]').value.split(/[,\n]/).map((value) => value.trim()).filter(Boolean);
+    return { question_text: item.querySelector('[name="question_text"]').value.trim(), question_type: questionType, options };
+  });
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
-  const survey_type = document.getElementById('survey_type').value;
-  const collect_contact = document.getElementById('collect_contact').checked;
-  const questionInputs = Array.from(questionsContainer.querySelectorAll('input[name="question_text"]'));
-  const questions = questionInputs.map((input) => input.value.trim()).filter(Boolean);
-
-  if (!title || title.length > 200) {
-    showMessage('Le titre est requis et doit faire au maximum 200 caractères.', 'error');
+  if (!title || description.length > 1000 || questions.some((question) => !question.question_text)) {
+    showMessage('Complétez le titre, la description et toutes les questions.', 'error');
     return;
   }
-
-  if (description.length > 1000) {
-    showMessage('La description ne doit pas dépasser 1000 caractères.', 'error');
+  if (questions.some((question) => ['single_choice', 'multiple_choice'].includes(question.question_type) && question.options.length < 2)) {
+    showMessage('Chaque question à choix doit contenir au moins deux options.', 'error');
     return;
   }
-
-  if (questions.length === 0) {
-    showMessage('Ajoutez au moins une question.', 'error');
+  if (questions.some((question) => question.question_type === 'open_ended' && question.options.length > 0)) {
+    showMessage('Supprimez les options des questions ouvertes.', 'error');
     return;
   }
-
-  if (questions.length > 50) {
-    showMessage('Le nombre maximum de questions est 50.', 'error');
-    return;
-  }
-
-  const payload = { title, description, survey_type, collect_contact, questions };
-
   try {
     const accessToken = await getAccessToken();
-    if (!accessToken) {
-      throw new Error('Vous devez être connecté pour créer un sondage.');
-    }
-
+    if (!accessToken) throw new Error('Vous devez être connecté pour créer un sondage.');
     const response = await fetch('/surveys', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+      body: JSON.stringify({ title, description, survey_type: surveyTypeInput.value, collecte_identite: document.getElementById('collect_contact').checked, questions }),
     });
-
     const result = await response.json();
-    if (!response.ok) {
-      throw new Error(result.detail || 'Erreur lors de la création du sondage.');
-    }
-
-    showMessage('Sondage créé avec succès ! ID : ' + result.id);
+    if (!response.ok) throw new Error(result.detail || 'Erreur lors de la création du sondage.');
+    showMessage(`Sondage créé avec succès. Identifiant : ${result.id}`);
     form.reset();
     questionsContainer.innerHTML = '<h2>Questions</h2>';
-    addQuestion();
+    questionsContainer.appendChild(createQuestionField(1));
+    updateSurveyType();
   } catch (error) {
     showMessage(error.message, 'error');
   }

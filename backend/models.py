@@ -4,11 +4,13 @@ from uuid import UUID
 
 class QuestionCreate(BaseModel):
     question_text: constr(strip_whitespace=True, min_length=1, max_length=1000)
+    question_type: constr(strip_whitespace=True, regex='^(single_choice|multiple_choice|open_ended)$') = 'open_ended'
+    options: List[constr(strip_whitespace=True, min_length=1, max_length=200)] = Field(default_factory=list, max_items=20)
 
 class SurveyCreate(BaseModel):
     title: constr(strip_whitespace=True, min_length=1, max_length=200)
     description: constr(strip_whitespace=True, max_length=1000) = ''
-    survey_type: constr(strip_whitespace=True, regex='^(single_choice|multiple_choice|open_ended)$')
+    survey_type: constr(strip_whitespace=True, regex='^(single_choice|multiple_choice|open_ended|mixed)$')
     collecte_identite: bool
     questions: List[QuestionCreate] = Field(..., min_items=1, max_items=50)
 

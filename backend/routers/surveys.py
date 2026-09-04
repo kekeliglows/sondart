@@ -50,6 +50,23 @@ def list_surveys(user_id: str = Depends(verify_jwt)):
 async def create_survey(payload: SurveyCreate, user_id: str = Depends(verify_jwt)):
     await check_quota(user_id)
 
+    for question in payload.questions:
+        if payload.survey_type == 'mixed':
+            question_type = question.question_type
+        else:
+            question_type = payload.survey_type
+
+        if question_type in ('single_choice', 'multiple_choice') and len(question.options) < 2:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail='Les questions à choix doivent proposer au moins deux options.',
+            )
+        if question_type == 'open_ended' and question.options:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail='Une question ouverte ne peut pas contenir d’options.',
+            )
+
     survey_id = str(uuid4())
     survey_row = {
         'id': survey_id,
@@ -70,7 +87,8 @@ async def create_survey(payload: SurveyCreate, user_id: str = Depends(verify_jwt
         {
             'survey_id': survey_id,
             'question_text': question.question_text,
-            'question_type': payload.survey_type,
+            'question_type': question.question_type if payload.survey_type == 'mixed' else payload.survey_type,
+            'options': question.options,
             'position': idx,
         }
         for idx, question in enumerate(payload.questions)
@@ -84,7 +102,7 @@ async def create_survey(payload: SurveyCreate, user_id: str = Depends(verify_jwt
 
     return {
         'id': survey_id,
-        'public_url': f'https://sondart.app/s/{survey_id}',
+        'public_url': f'/frontend/take_survey.html?id={survey_id}',
     }
 
 @router.get('/public/{survey_id}')
@@ -104,7 +122,7 @@ def get_public_survey(survey_id: UUID):
 
     questions_result = (
         supabase.table('questions')
-        .select('id,question_text,question_type,position')
+        .select('id,question_text,question_type,options,position')
         .eq('survey_id', str(survey_id))
         .order('position', ascending=True)
         .execute()
@@ -120,6 +138,45 @@ def get_public_survey(survey_id: UUID):
         'description': survey_result.data.get('description', ''),
         'questions': questions_result.data or [],
     }
+
+@router.post('/public/{survey_id}/responses')
+def submit_public_response(survey_id: UUID, payload: PublicSurveyAnswer):
+    survey_result = supabase.table('surveys').select('id,collecte_identite').eq('id', str(survey_id)).single().execute()
+    if survey_result.error or survey_result.data is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Sondage introuvable.')
+
+    questions_result = supabase.table('questions').select('id,question_type,options').eq('survey_id', str(survey_id)).execute()
+    if questions_result.error:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail='Impossible de valider les réponses.')
+    questions = {str(question['id']): question for question in questions_result.data or []}
+    if any(str(answer.question_id) not in questions for answer in payload.answers):
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Une réponse ne correspond pas à ce sondage.')
+
+    for answer in payload.answers:
+        question = questions[str(answer.question_id)]
+        if not answer.answer_text:
+            continue
+        if question['question_type'] == 'single_choice' and answer.answer_text not in (question.get('options') or []):
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Option de réponse invalide.')
+        if question['question_type'] == 'multiple_choice' and answer.answer_text not in (question.get('options') or []):
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Option de réponse invalide.')
+
+    respondent = supabase.table('respondents').insert({
+        'survey_id': str(survey_id),
+        'metadata': {'name': payload.name, 'email': payload.email} if survey_result.data.get('collecte_identite') else {},
+    }).execute()
+    if respondent.error or not respondent.data:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail='Impossible d’enregistrer le répondant.')
+
+    rows = [
+        {'question_id': str(answer.question_id), 'respondent_id': respondent.data[0]['id'], 'answer_text': answer.answer_text}
+        for answer in payload.answers if answer.answer_text
+    ]
+    if rows:
+        answers_result = supabase.table('answers').insert(rows).execute()
+        if answers_result.error:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail='Impossible d’enregistrer les réponses.')
+    return {'message': 'Réponses enregistrées.'}
 
 @router.get('/{survey_id}/results')
 def get_survey_results(survey_id: UUID, user_id: str = Depends(verify_jwt)):

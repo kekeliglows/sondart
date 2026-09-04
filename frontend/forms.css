@@ -83,6 +83,27 @@ input[type="checkbox"] {
   background: var(--color-surface);
 }
 
+.question-main {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.options-field[hidden] {
+  display: none;
+}
+
+.options-field small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.question-type-field select:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .question-item .remove-question {
   min-height: 3rem;
   padding: 0.75rem 1rem;
@@ -117,6 +138,44 @@ input[type="checkbox"] {
   display: grid;
   gap: 1.5rem;
   margin-top: 2rem;
+}
+
+.public-survey {
+  max-width: 760px;
+}
+
+.response-form {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.response-question {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.response-question legend {
+  max-width: 100%;
+  padding: 0 0.25rem;
+  font-weight: 700;
+}
+
+.response-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  background: #f8faff;
+}
+
+.response-option:hover {
+  background: var(--color-primary-soft);
 }
 
 .survey-result-section {

@@ -38,10 +38,15 @@ create table questions (
   survey_id uuid not null references surveys(id) on delete cascade,
   question_text text not null,
   question_type text not null default 'text',
+  options jsonb not null default '[]'::jsonb,
   position integer not null default 0,
   created_at timestamp with time zone default now(),
   updated_at timestamp with time zone default now()
 );
+
+alter table questions drop constraint if exists questions_question_type_check;
+alter table questions add constraint questions_question_type_check
+  check (question_type in ('single_choice', 'multiple_choice', 'open_ended'));
 alter table questions enable row level security;
 create policy "Questions owner select" on questions for select using (
   exists (select 1 from surveys where surveys.id = questions.survey_id and surveys.owner_id = auth.uid())

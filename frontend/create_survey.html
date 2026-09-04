@@ -27,11 +27,14 @@
       <label>
         Type de sondage
         <select id="survey_type">
-          <option value="single_choice">QCM</option>
+          <option value="single_choice">Choix unique</option>
           <option value="multiple_choice">Choix multiple</option>
           <option value="open_ended">Question ouverte</option>
+          <option value="mixed">Mélange de types</option>
         </select>
       </label>
+
+      <p class="section-note" id="survey-type-help">Toutes les questions utiliseront le type sélectionné.</p>
 
       <label>
         <input type="checkbox" id="collect_contact" />

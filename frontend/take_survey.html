@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Participer à un sondage | SondArt</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="forms.css" />
+</head>
+<body>
+  <main class="page-shell public-survey" id="survey-app">
+    <div id="survey-loading">Chargement du sondage...</div>
+    <section id="survey-content" hidden>
+      <h1 class="page-title" id="survey-title"></h1>
+      <p class="page-intro" id="survey-description"></p>
+      <form id="response-form" class="response-form"></form>
+    </section>
+    <p id="survey-message" aria-live="polite"></p>
+  </main>
+  <script type="module" src="take_survey.js"></script>
+</body>
+</html>
