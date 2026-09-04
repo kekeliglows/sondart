@@ -1,8 +1,8 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 // Ne jamais utiliser la clé service_role côté client.
-const SUPABASE_URL = 'https://your-supabase-project-url.supabase.co';
-const SUPABASE_ANON_KEY = 'your-supabase-anon-key';
+const SUPABASE_URL = 'https://jyvhxjnefapsksogolgp.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_nrBkbo2JdvmO1WX2yRPAdg_SboZVlmT';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 

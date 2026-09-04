@@ -152,9 +152,15 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 640px) {
-  .page-shell {
+  body {
+    overflow-x: hidden;
+  }
+
+  main.page-shell {
     margin: 1rem;
     padding: 1.25rem;
+    width: calc(100% - 2rem);
+    max-width: none;
   }
 
   .question-item {
@@ -162,6 +168,11 @@ input[type="checkbox"] {
   }
 
   .question-item .remove-question {
+    width: 100%;
+  }
+
+  #add-question,
+  #survey-form > button[type="submit"] {
     width: 100%;
   }
 }
