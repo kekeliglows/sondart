@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vérifier votre email | SondArt</title>
+  <link rel="stylesheet" href="../frontend/design-system.css" />
+  <link rel="stylesheet" href="login.css" />
+  <style>
+    .verify-container {
+      max-width: 500px;
+      margin: 4rem auto;
+      padding: 3rem;
+      text-align: center;
+      background: var(--color-surface);
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 32px rgba(29, 43, 83, 0.12);
+    }
+
+    .verify-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .verify-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    .verify-description {
+      color: var(--color-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .verify-email {
+      background: rgba(47, 111, 237, 0.08);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      word-break: break-all;
+    }
+
+    .verify-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #4d90ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .verify-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(47, 111, 237, 0.3);
+    }
+
+    .verify-tips {
+      background: rgba(77, 144, 255, 0.04);
+      border-left: 3px solid var(--color-primary);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .verify-tips h4 {
+      margin-bottom: 0.75rem;
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .verify-tips ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    .verify-tips li {
+      margin-bottom: 0.5rem;
+    }
+
+    .verify-tips li:before {
+      content: "→ ";
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+
+    .resend-link {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .resend-link a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .resend-link a:hover {
+      text-decoration: underline;
+    }
+
+    .countdown {
+      color: var(--color-muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header-minimal">
+    <a class="brand-link-minimal" href="../">
+      <svg class="brand-mark-minimal" viewBox="0 0 48 48" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="135%" y2="135%">
+            <stop offset="0%" style="stop-color:#2f6fed;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#4d90ff;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="22" fill="url(#logoGrad)" />
+        <circle cx="24" cy="14" r="6" fill="#ffffff" />
+        <path d="M20 20c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M24 24v6" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+        <circle cx="24" cy="14" r="9" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4" />
+        <circle cx="24" cy="14" r="13" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2" />
+      </svg>
+      <span class="brand-title-minimal">SondArt</span>
+    </a>
+  </header>
+
+  <main class="verify-container">
+    <div class="verify-icon">✉️</div>
+    <h1 class="verify-title">Vérifiez votre email</h1>
+    <p class="verify-description">
+      Nous avons envoyé un lien de confirmation à votre adresse email. Cliquez sur le lien pour activer votre compte.
+    </p>
+
+    <div class="verify-email" id="verify-email">user@example.com</div>
+
+    <button class="verify-button" id="open-email-btn">
+      📧 Ouvrir ma boîte mail
+    </button>
+
+    <div class="verify-tips">
+      <h4>Conseil utile</h4>
+      <ul>
+        <li>Le lien de confirmation expire dans 24 heures</li>
+        <li>Vérifiez votre dossier spam si vous ne trouvez pas l'email</li>
+        <li>Une fois vérifié, vous pourrez accéder à votre tableau de bord</li>
+      </ul>
+    </div>
+
+    <div class="resend-link">
+      N'avez pas reçu l'email ?
+      <a id="resend-btn">Renvoyer le lien</a>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </main>
+
+  <script type="module" src="verify-email.js"></script>
+</body>
+
+</html>

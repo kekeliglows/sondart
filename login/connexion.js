@@ -191,7 +191,7 @@ async function handleLogin() {
     }
 
     setStatus(status, 'Connexion réussie. Redirection en cours…', 'success');
-    window.location.href = '/';
+    window.location.href = '/frontend/dashboard.html';
   } catch (error) {
     const message = error.message === 'offline'
       ? 'Vous êtes hors ligne. Vérifiez votre connexion internet.'
@@ -251,9 +251,15 @@ async function handleRegister() {
       return;
     }
 
-    setStatus(status, 'Inscription réussie ! Vérifiez votre boîte mail pour confirmation.', 'success');
-    submitButton.textContent = 'Inscription réussie';
-    submitButton.blur();
+    setStatus(status, 'Inscription réussie ! Redirection vers la vérification d\'email…', 'success');
+    
+    // Stocker l'email pour la page de vérification
+    sessionStorage.setItem('pending_verification_email', emailInput.value.trim());
+    
+    // Rediriger vers la page de vérification d'email
+    setTimeout(() => {
+      window.location.href = 'verify-email.html';
+    }, 1500);
   } catch (error) {
     const message = error.message === 'offline'
       ? 'Vous êtes hors ligne. Vérifiez votre connexion internet.'
