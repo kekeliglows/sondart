@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créer un sondage</title>
+  <link rel="stylesheet" href="design-system.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <h1 class="page-title">Créer un sondage</h1>
+    <p class="page-intro">Créez un formulaire simple et partageable pour collecter les réponses de votre public.</p>
+    <form id="survey-form">
+      <label>
+        Titre
+        <input type="text" id="title" maxlength="200" required />
+      </label>
+
+      <label>
+        Description
+        <textarea id="description" maxlength="1000" rows="4"></textarea>
+      </label>
+
+      <label>
+        Type de sondage
+        <select id="survey_type">
+          <option value="single_choice">QCM</option>
+          <option value="multiple_choice">Choix multiple</option>
+          <option value="open_ended">Question ouverte</option>
+        </select>
+      </label>
+
+      <label>
+        <input type="checkbox" id="collect_contact" />
+        Collecter nom et email des répondants
+      </label>
+
+      <div id="questions-container">
+        <h2>Questions</h2>
+      </div>
+      <button type="button" id="add-question">+ ajouter une question</button>
+
+      <button type="submit">Créer le sondage</button>
+      <p id="form-message" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <script type="module" src="create_survey.js"></script>
+</body>
+</html>
+<!-- je ne trouve pas son css-->

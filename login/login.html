@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion | SondArt</title>
+  <link rel="stylesheet" href="../frontend/design-system.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+  <header class="site-header-minimal">
+    <a class="brand-link-minimal" href="../">
+      <svg class="brand-mark-minimal" viewBox="0 0 48 48" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="135%" y2="135%">
+            <stop offset="0%" style="stop-color:#2f6fed;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#4d90ff;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="22" fill="url(#logoGrad)" />
+        <circle cx="24" cy="14" r="6" fill="#ffffff" />
+        <path d="M20 20c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M24 24v6" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+        <circle cx="24" cy="14" r="9" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4" />
+        <circle cx="24" cy="14" r="13" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2" />
+      </svg>
+      <span class="brand-title-minimal">SondArt</span>
+    </a>
+  </header>
+
+  <main class="page-shell auth-shell" aria-labelledby="login-title">
+    <header class="auth-header">
+      <h1 id="login-title" class="page-title">Connexion</h1>
+      <p class="page-intro">Accède à ton espace SondArt pour créer et gérer tes sondages.</p>
+    </header>
+
+    <form id="login-form" class="auth-form" novalidate>
+      <div class="form-group">
+        <label for="email-login">Adresse email</label>
+        <input
+          type="email"
+          id="email-login"
+          name="email"
+          autocomplete="email"
+          required
+          placeholder="email@example.com"
+        />
+        <p class="field-error" id="email-login-error" aria-live="polite"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="password-login">Mot de passe</label>
+        <div class="password-field">
+          <input
+            type="password"
+            id="password-login"
+            name="password"
+            autocomplete="current-password"
+            required
+            placeholder="••••••••"
+          />
+          <button
+            type="button"
+            id="toggle-password-login"
+            class="icon-button"
+            aria-pressed="false"
+            aria-label="Afficher le mot de passe"
+          >
+            <span aria-hidden="true">👁</span>
+          </button>
+        </div>
+        <p class="field-error" id="password-login-error" aria-live="polite"></p>
+      </div>
+
+      <label class="inline-control" for="remember-login">
+        <input type="checkbox" id="remember-login" name="remember" />
+        Se souvenir de moi
+      </label>
+
+      <div id="login-status" class="form-status visually-hidden" role="status" aria-live="polite"></div>
+      <button type="submit" id="login-submit">Se connecter</button>
+    </form>
+
+    <div class="divider" aria-hidden="true"><span>ou</span></div>
+
+    <div class="auth-actions">
+      <button type="button" id="google-login" class="secondary-button">Connexion Google</button>
+      <p class="auth-note">Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
+    </div>
+  </main>
+
+  <script type="module" src="connexion.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résultats du sondage</title>
+  <link rel="stylesheet" href="design-system.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <h1 class="page-title">Résultats du sondage</h1>
+    <p class="page-intro">Consultez les résultats et les indicateurs de participation pour ce sondage.</p>
+    <button id="reset-survey" type="button">Réinitialiser le sondage</button>
+    <div id="results-container"></div>
+  </main>
+  <script type="module">
+    import { renderResults } from './results.js';
+    import { confirmAndResetSurvey } from './results_reset.js';
+
+    async function loadResults() {
+      const surveyId = new URLSearchParams(window.location.search).get('id');
+      if (!surveyId) {
+        document.getElementById('results-container').textContent = 'Identifiant de sondage manquant.';
+        return;
+      }
+
+      const response = await fetch(`/surveys/${surveyId}/results`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const payload = await response.json();
+        document.getElementById('results-container').textContent = payload.detail || 'Impossible de charger les résultats.';
+        return;
+      }
+
+      const data = await response.json();
+      renderResults(data);
+    }
+
+    async function handleReset() {
+      const surveyId = new URLSearchParams(window.location.search).get('id');
+      if (!surveyId) {
+        alert('Identifiant de sondage manquant.');
+        return;
+      }
+
+      try {
+        await confirmAndResetSurvey(surveyId);
+        alert('Sondage réinitialisé avec succès.');
+        loadResults();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    document.getElementById('reset-survey').addEventListener('click', handleReset);
+
+    loadResults().catch((error) => {
+      document.getElementById('results-container').textContent = error.message;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SondArt - Sondages Modernes & Efficaces</title>
+  <link rel="stylesheet" href="frontend/design-system.css" />
+  <link rel="stylesheet" href="frontend/styles.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a class="brand-link" href="./">
+      <svg class="brand-mark" viewBox="0 0 48 48" width="48" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="135%" y2="135%">
+            <stop offset="0%" style="stop-color:#2f6fed;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#4d90ff;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="22" fill="url(#logoGrad)" />
+        <circle cx="24" cy="14" r="6" fill="#ffffff" />
+        <path d="M20 20c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M24 24v6" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+        <circle cx="24" cy="14" r="9" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4" />
+        <circle cx="24" cy="14" r="13" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2" />
+      </svg>
+      <span class="brand-title">SondArt</span>
+    </a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <a class="nav-link" href="login/login.html">Connexion</a>
+      <a class="nav-link nav-primary" href="login/register.html">Commencer</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background">
+        <div class="gradient-blur-1"></div>
+        <div class="gradient-blur-2"></div>
+        <div class="gradient-blur-3"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-badge">✨ Collectez des avis en 2 minutes</span>
+          <h1 class="hero-title">Créez des sondages qui <span class="gradient-text">captivent</span> vos utilisateurs</h1>
+          <p class="hero-description">Une plateforme intuitive pour créer, partager et analyser vos sondages. Du concept à la première réponse, plus simple que jamais.</p>
+          
+          <div class="hero-actions">
+            <a href="login/register.html" class="btn btn-primary">
+              <span>Créer mon premier sondage</span>
+              <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="login/login.html" class="btn btn-secondary">
+              <span>Déjà inscrit</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Sondages créés</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">25k+</div>
+              <div class="stat-label">Réponses collectées</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Satisfaction client</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="mockup-card">
+            <div class="mockup-header">
+              <div class="dot dot-1"></div>
+              <div class="dot dot-2"></div>
+              <div class="dot dot-3"></div>
+            </div>
+            <div class="mockup-content">
+              <div class="mock-line"></div>
+              <div class="mock-line"></div>
+              <div class="mock-box"></div>
+            </div>
+            <div class="mockup-footer">
+              <div class="mock-button"></div>
+            </div>
+          </div>
+
+          <div class="floating-card card-1">
+            <div class="card-icon">📊</div>
+            <div class="card-text">Résultats<br>en temps réel</div>
+          </div>
+          <div class="floating-card card-2">
+            <div class="card-icon">🎨</div>
+            <div class="card-text">Design<br>personnalisable</div>
+          </div>
+          <div class="floating-card card-3">
+            <div class="card-icon">🔗</div>
+            <div class="card-text">Partage facile<br>QR + Lien</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="features-header">
+        <h2 class="section-title">Pourquoi <span class="gradient-text">SondArt</span> ?</h2>
+        <p class="section-description">Tout ce dont vous avez besoin pour collecter et analyser les avis de votre audience</p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card feature-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M32 16v32M20 28h24M20 36h24" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Création rapide</h3>
+          <p>Construisez votre sondage en quelques minutes avec notre interface drag-and-drop intuitive.</p>
+          <div class="feature-accent"></div>
+        </article>
+
+        <article class="feature-card feature-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M24 32c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z"/>
+              <path d="M20 20l-6-6M44 44l6 6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Analyse intelligente</h3>
+          <p>Visualisez vos données avec des graphiques modernes et des insights automatiques.</p>
+          <div class="feature-accent"></div>
+        </article>
+
+        <article class="feature-card feature-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M28 24h8M28 32h8M28 40h8M24 28v16"/>
+            </svg>
+          </div>
+          <h3>Sécurisé & privé</h3>
+          <p>Vos données et celles de vos répondants sont protégées avec Supabase Auth.</p>
+          <div class="feature-accent"></div>
+        </article>
+
+        <article class="feature-card feature-4">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M32 20v24M20 32h24"/>
+              <circle cx="32" cy="32" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Support 24/7</h3>
+          <p>Notre équipe est disponible pour vous aider à chaque étape de votre parcours.</p>
+          <div class="feature-accent"></div>
+        </article>
+
+        <article class="feature-card feature-5">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M24 28l4 4 8-8M24 44h16"/>
+            </svg>
+          </div>
+          <h3>Modèles prêts</h3>
+          <p>Démarrez avec nos templates professionnels adaptés à chaque secteur.</p>
+          <div class="feature-accent"></div>
+        </article>
+
+        <article class="feature-card feature-6">
+          <div class="feature-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="32" r="28" opacity="0.1" fill="currentColor"></circle>
+              <path d="M24 32h16M24 40h16M24 24h16" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Intégrations</h3>
+          <p>Connectez SondArt à vos outils favoris pour un workflow fluide.</p>
+          <div class="feature-accent"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-content">
+        <h2>Prêt à transformer vos sondages ?</h2>
+        <p>Rejoignez des centaines d'utilisateurs qui créent déjà des sondages efficaces avec SondArt</p>
+        <a href="login/register.html" class="btn btn-primary btn-large">
+          <span>Commencer maintenant - C'est gratuit</span>
+          <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>SondArt</h4>
+        <p>Créez des sondages qui font la différence</p>
+      </div>
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="login/login.html">Connexion</a></li>
+          <li><a href="login/register.html">Inscription</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Ressources</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 SondArt. Tous les droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="frontend/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+:root {
+  --color-bg: #eef5ff;
+  --color-surface: #ffffff;
+  --color-primary: #2f6fed;
+  --color-primary-strong: #1f5ce0;
+  --color-primary-soft: #dbe8ff;
+  --color-text: #121a2d;
+  --color-muted: #5f6f8b;
+  --color-border: rgba(47, 111, 237, 0.16);
+  --color-success: #2f8f5f;
+  --color-error: #d64545;
+  --radius: 1rem;
+  --shadow: 0 18px 48px rgba(29, 43, 83, 0.08);
+  --spacing-xxs: 0.5rem;
+  --spacing-xs: 0.75rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --font-heading: "Inter", "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: linear-gradient(180deg, #f7f9ff 0%, #eef5ff 100%);
+}
+
+img,
+button,
+input,
+textarea,
+select,
+a {
+  font: inherit;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
